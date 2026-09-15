@@ -1,0 +1,45 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:4.3
+
+    steps:
+      - name: Download project
+        uses: actions/checkout@v4
+
+      - name: Prepare Godot export templates
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /root/.local/share/godot/export_templates
+          template_dir="$(find /root/.local/share/godot/templates -mindepth 1 -maxdepth 1 -type d | head -n 1)"
+          test -n "$template_dir"
+          cp -R "$template_dir" /root/.local/share/godot/export_templates/
+
+      - name: Build debug APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p build
+          godot --headless --path . --export-debug "Android APK" build/UrbanFighters.apk
+          test -s build/UrbanFighters.apk
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: UrbanFighters-Android
+          path: build/UrbanFighters.apk
+          if-no-files-found: error
+          retention-days: 30
+
