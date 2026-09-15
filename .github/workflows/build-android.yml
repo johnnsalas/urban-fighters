@@ -14,7 +14,7 @@ jobs:
     env:
       HOME: /root
     container:
-      image: barichello/godot-ci:4.3
+      image: barichello/godot-ci:4.4.1
 
     steps:
       - name: Download project
@@ -25,16 +25,13 @@ jobs:
         run: |
           set -euo pipefail
           wget -q \
-            https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_export_templates.tpz \
+            https://github.com/godotengine/godot/releases/download/4.4.1-stable/Godot_v4.4.1-stable_export_templates.tpz \
             -O /tmp/godot-templates.tpz
           rm -rf /tmp/godot-templates
           mkdir -p /tmp/godot-templates
           unzip -q /tmp/godot-templates.tpz -d /tmp/godot-templates
-          mkdir -p "$HOME/.local/share/godot/export_templates/4.3.stable"
-          cp -R /tmp/godot-templates/templates/. "$HOME/.local/share/godot/export_templates/4.3.stable/"
-          rm -rf android/build
-          mkdir -p android/build
-          unzip -q "$HOME/.local/share/godot/export_templates/4.3.stable/android_source.zip" -d android/build
+          mkdir -p "$HOME/.local/share/godot/export_templates/4.4.1.stable"
+          cp -R /tmp/godot-templates/templates/. "$HOME/.local/share/godot/export_templates/4.4.1.stable/"
 
       - name: Configure Android SDK and debug signing
         shell: bash
@@ -65,7 +62,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p build
-          godot --headless --path . --export-debug "Android APK" build/UrbanFighters.apk
+          godot --headless --verbose --path . --export-debug "Android APK" build/UrbanFighters.apk
           test -s build/UrbanFighters.apk
 
       - name: Upload APK
