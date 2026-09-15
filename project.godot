@@ -1,0 +1,29 @@
+[application]
+config/name="Urban Fighters"
+run/main_scene="res://main.tscn"
+config/features=PackedStringArray("4.3", "GL Compatibility")
+
+[display]
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/window_width_override=1280
+window/size/window_height_override=720
+window/stretch/mode="canvas_items"
+window/handheld/orientation=1
+
+[rendering]
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/default_filters/use_nearest_mipmap_filter=false
+textures/canvas_textures/default_texture_filter=0
+
+[input]
+move_left={"deadzone":0.3,"events":[Object(InputEventKey,"physical_keycode":65),Object(InputEventKey,"physical_keycode":4194311)]}
+move_right={"deadzone":0.3,"events":[Object(InputEventKey,"physical_keycode":68),Object(InputEventKey,"physical_keycode":4194313)]}
+jump={"deadzone":0.3,"events":[Object(InputEventKey,"physical_keycode":87),Object(InputEventKey,"physical_keycode":32),Object(InputEventKey,"physical_keycode":4194320)]}
+crouch={"deadzone":0.3,"events":[Object(InputEventKey,"physical_keycode":83),Object(InputEventKey,"physical_keycode":4194322)]}
+punch={"deadzone":0.3,"events":[Object(InputEventKey,"physical_keycode":74)]}
+kick={"deadzone":0.3,"events":[Object(InputEventKey,"physical_keycode":75)]}
+special={"deadzone":0.3,"events":[Object(InputEventKey,"physical_keycode":76)]}
+block={"deadzone":0.3,"events":[Object(InputEventKey,"physical_keycode":73)]}
+
