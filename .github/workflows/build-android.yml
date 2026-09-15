@@ -62,7 +62,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p build
-          godot --headless --path . --install-android-build-template
+          godot --headless --editor --quit --path . --install-android-build-template
           godot --headless --path . --export-debug "Android APK" build/UrbanFighters.apk
           test -s build/UrbanFighters.apk
 
