@@ -22,10 +22,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p /root/.local/share/godot/export_templates
-          template_dir="$(find /root/.local/share/godot/templates -mindepth 1 -maxdepth 1 -type d | head -n 1)"
-          test -n "$template_dir"
-          cp -R "$template_dir" /root/.local/share/godot/export_templates/
+          wget -q \
+            https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_export_templates.tpz \
+            -O /tmp/godot-templates.tpz
+          rm -rf /tmp/godot-templates
+          mkdir -p /tmp/godot-templates
+          unzip -q /tmp/godot-templates.tpz -d /tmp/godot-templates
+          mkdir -p "$HOME/.local/share/godot/export_templates/4.3.stable"
+          cp -R /tmp/godot-templates/templates/. "$HOME/.local/share/godot/export_templates/4.3.stable/"
 
       - name: Build debug APK
         shell: bash
@@ -42,4 +46,3 @@ jobs:
           path: build/UrbanFighters.apk
           if-no-files-found: error
           retention-days: 30
-
