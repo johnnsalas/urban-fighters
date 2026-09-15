@@ -286,7 +286,7 @@ func draw_fight() -> void:
 		draw_string(ThemeDB.fallback_font, Vector2(640, 340), announcement, HORIZONTAL_ALIGNMENT_CENTER, 0, 72, Color("fff3b0"))
 
 func draw_stage() -> void:
-	var sky := [Color("4a2b78"), Color("14213d"), Color("f28c54")][stage_index]
+	var sky: Color = [Color("4a2b78"), Color("14213d"), Color("f28c54")][stage_index]
 	draw_rect(Rect2(0, 0, 1280, 720), sky)
 	if stage_index == 0:
 		for i in range(12):
@@ -355,4 +355,3 @@ func draw_result() -> void:
 	draw_string(ThemeDB.fallback_font, Vector2(640, 220), "VICTORIA" if victory else "DERROTA", HORIZONTAL_ALIGNMENT_CENTER, 0, 88, Color("f6d743") if victory else Color("ef476f"))
 	draw_string(ThemeDB.fallback_font, Vector2(640, 310), player.name + "  %d - %d  " % [player.wins, enemy.wins] + enemy.name, HORIZONTAL_ALIGNMENT_CENTER, 0, 34, Color.WHITE)
 	draw_string(ThemeDB.fallback_font, Vector2(640, 440), "TOCA PARA ELEGIR LUCHADOR", HORIZONTAL_ALIGNMENT_CENTER, 0, 28, Color("cbd0e8"))
-
