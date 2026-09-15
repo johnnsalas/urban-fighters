@@ -56,6 +56,7 @@ jobs:
             'export/android/debug_keystore_user = "androiddebugkey"' \
             'export/android/debug_keystore_pass = "android"' \
             > "$HOME/.config/godot/editor_settings-4.tres"
+          godot --headless --editor --quit --path .
 
       - name: Build debug APK
         shell: bash
